@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import ws.MySQLAccess;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -69,9 +72,10 @@ public class RecordMenu {
 		JButton btnDisagreements = new JButton("Disagreements");
 		btnDisagreements.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Disagreements diss = new Disagreements(); diss.invokeSomeMethod();
-				 */
+				
+				 DisagreementsUpload diss = new DisagreementsUpload(); 
+				 diss.main(null);
+				 
 			}
 		});
 		btnDisagreements.setBounds(374, 13, 138, 45);
