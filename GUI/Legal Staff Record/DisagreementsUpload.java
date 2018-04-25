@@ -11,6 +11,7 @@ import ws.MySQLAccess;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class DisagreementsUpload {
@@ -18,7 +19,8 @@ public class DisagreementsUpload {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private Statement statement = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -87,7 +89,11 @@ public class DisagreementsUpload {
 					String strategyID = textField_1.getText();
 					String clientID = textField.getText();
 		
-					sqlcon.DisagreementUploadSQL(clientID, strategyID);
+					statement=sqlcon.readDataBase();
+					statement.executeUpdate(
+							"UPDATE cases c, appointment a SET c.Disagree=1 WHERE c.appointmentID=a.appointmentID AND a.clientID='"
+									+ clientID + "' AND c.strategyID='" + strategyID + "'");
+
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
