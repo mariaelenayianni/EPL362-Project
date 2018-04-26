@@ -8,8 +8,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.jdbc.MySQLConnection;
-
 import ws.MySQLAccess;
 
 import javax.swing.JList;
@@ -20,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import java.util.Vector;
+
 public class viewTransaction {
 
 	private JFrame frame;
@@ -46,7 +45,6 @@ public class viewTransaction {
 	 * Create the application.
 	 */
 
-
 	public viewTransaction() {
 
 		initialize();
@@ -58,7 +56,7 @@ public class viewTransaction {
 	private void initialize() {
 		MySQLAccess conn = new MySQLAccess();
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 551, 351);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -83,12 +81,14 @@ public class viewTransaction {
 		frame.getContentPane().add(lblResults);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 119, 404, 131);
+		scrollPane.setBounds(20, 119, 484, 170);
 		frame.getContentPane().add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		DefaultTableModel model = new DefaultTableModel(new String[]{"Case ID", "Strategy ID", "Disagree", "Disputes", "Updated", "Confirmation","Details"}, 0);
+		DefaultTableModel model = new DefaultTableModel(
+				new String[] { "Case ID", "Strategy ID", "Disagree", "Disputes", "Updated", "Confirmation", "Details" },
+				0);
 
 		JButton btnView = new JButton("View");
 		btnView.addActionListener(new ActionListener() {
@@ -96,45 +96,40 @@ public class viewTransaction {
 				try {
 					String id;
 					int id_client;
-					int wrong=0;
-					id=textField.getText();
-					if(id.equals("")) {
-						wrong=1;
+					int wrong = 0;
+					id = textField.getText();
+					if (id.equals("")) {
+						wrong = 1;
 					}
-					if(wrong==0) {
-						id_client=Integer.parseInt(id);
-						Statement pst=conn.readDataBaseTransac();
-						String query="select * from cases";
+					if (wrong == 0) {
+						id_client = Integer.parseInt(id);
+						Statement pst = conn.readDataBase();
+						String query = "select * from cases, appointment where appointment.appointmentID=cases.appointmentID AND appointment.clientID="
+								+ id_client;
 
-						ResultSet rs=pst.executeQuery(query);
-						Vector<Object> columnNames = new Vector<>();
-						Vector<Vector<Object>> data = new Vector<>();
+						ResultSet rs = pst.executeQuery(query);
 						ResultSetMetaData metaData = rs.getMetaData();
-						
-						
-						while(rs.next())
-						{
 
-						    String a = rs.getString("caseID");
-						    String b = rs.getString("strategyID");
-						    String c = rs.getString("appointmentID");
-						    String d = rs.getString("Disagree");
-						    String e = rs.getString("Disputes");
-						    String f = rs.getString("Updated");
-						    String h = rs.getString("Confirmation");
-						    String j = rs.getString("Details");
-						    String k = rs.getString("CaseType");
-						    model.addRow(new Object[]{a, b, c, d, e, f, h, j, k});
+						while (rs.next()) {
+
+							String a = rs.getString("caseID");
+							String b = rs.getString("strategyID");
+							String c = rs.getString("appointmentID");
+							String d = rs.getString("Disagree");
+							String e = rs.getString("Disputes");
+							String f = rs.getString("Updated");
+							String h = rs.getString("Confirmation");
+							String j = rs.getString("Details");
+							String k = rs.getString("CaseType");
+							model.addRow(new Object[] { a, b, c, d, e, f, h, j, k });
 						}
-						if(!(rs.next())){
-							System.out.print("NO ROWS!!");
-						}
-						//while (rs.next()) {
+
+						// while (rs.next()) {
 
 						table.setModel(model);
 
-						//table.setModel(null);
-						//}
+						// table.setModel(null);
+						// }
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -144,7 +139,6 @@ public class viewTransaction {
 		btnView.setFont(new Font("Calibri", Font.PLAIN, 13));
 		btnView.setBounds(169, 46, 78, 18);
 		frame.getContentPane().add(btnView);
-
 
 	}
 }
