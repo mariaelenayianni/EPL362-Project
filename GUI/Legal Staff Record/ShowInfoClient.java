@@ -185,7 +185,7 @@ public class ShowInfoClient {
 
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(116, 165, 86, 20);
+		textField_3.setBounds(116, 165, 149, 20);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		textField_3.setEditable(false);
