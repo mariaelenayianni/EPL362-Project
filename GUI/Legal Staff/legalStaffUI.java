@@ -90,5 +90,48 @@ public class legalStaffUI {
 				}
 			}
 		});
+		panel_1.add(btnNewButton);
 		
+		JButton btnNewButton_1 = new JButton("Comment Request");
+		btnNewButton_1.setForeground(new Color(0, 128, 0));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new addCommentUI();
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		panel_1.add(btnNewButton_1);
+		
+		JButton btnShowEstimatedRisk = new JButton("Show Risk Indicator");
+		btnShowEstimatedRisk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new RiskIndicator();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnShowEstimatedRisk.setForeground(new Color(0, 128, 0));
+		panel_1.add(btnShowEstimatedRisk);
+		
+		JButton btnRequestForChange = new JButton("Request for change");
+		btnRequestForChange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new requestForChangeUI();
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnRequestForChange.setForeground(new Color(0, 128, 0));
+		panel_1.add(btnRequestForChange);
+	}
 }
