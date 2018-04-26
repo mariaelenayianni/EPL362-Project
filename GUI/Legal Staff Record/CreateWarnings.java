@@ -53,7 +53,7 @@ public class CreateWarnings {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 435, 376);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblCreateWarning = new JLabel("Create Warning");
