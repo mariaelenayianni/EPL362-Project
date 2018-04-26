@@ -62,7 +62,7 @@ public class changePersonalInfo {
 		MySQLAccess conn = new MySQLAccess();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 601, 386);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblRequestForChanging = new JLabel("Request for changing Personal Info");
