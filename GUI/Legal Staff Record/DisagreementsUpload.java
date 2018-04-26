@@ -54,7 +54,7 @@ public class DisagreementsUpload {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 341, 303);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblUploadDisagreements = new JLabel("Insert Disagreements");
