@@ -57,7 +57,7 @@ public class viewTransaction {
 		MySQLAccess conn = new MySQLAccess();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 551, 351);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblViewTransaction = new JLabel("View Transaction");
