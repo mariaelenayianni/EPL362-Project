@@ -52,7 +52,7 @@ public class InsertStrategy {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 351, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblInsertStrategy = new JLabel("Insert Strategy");
