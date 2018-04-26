@@ -52,7 +52,7 @@ public class illegaluplaod {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 369, 245);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblIllegalMoneyLaundering = new JLabel("Illegal Money Laundering Upload");
