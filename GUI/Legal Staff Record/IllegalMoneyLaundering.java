@@ -10,11 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import ws.MySQLAccess;
+import javax.swing.JScrollPane;
 
 public class IllegalMoneyLaundering {
 
@@ -55,8 +57,8 @@ public class IllegalMoneyLaundering {
 	 */
 	private void initialize() throws SQLException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 619, 449);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 347, 434);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblIllegalMoneyLaundering = new JLabel("Illegal Money Laundering");
@@ -74,27 +76,26 @@ public class IllegalMoneyLaundering {
 			statement = sqlcon.readDataBase();
 			resultSet = statement.executeQuery("select client.clientID from client where client.illegal=1");
 
-			// writeResultSet(resultSet);
+		
 
-			int c = 1;
-			Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-
-			Vector<Object> row = new Vector<Object>();
+			DefaultTableModel model = new DefaultTableModel(new String[] { "ClientID" }, 0);
 
 			while (resultSet.next()) {
-				row.add(c);
-				row.add(resultSet.getString("clientID"));
-				data.add(row);
+
+				String a = resultSet.getString("clientID");
+
+				model.addRow(new Object[] { a });
 			}
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(22, 134, 253, 200);
+			frame.getContentPane().add(scrollPane);
+			table = new JTable();
+			scrollPane.setViewportView(table);
 
-			Vector<String> headers = new Vector<String>();
-			headers.add("Num");
-			headers.add("ClientID");
+			// while (rs.next()) {
 
-			TableModel model = new DefaultTableModel(data, headers);
-			table = new JTable(model);
-			table.setBounds(22, 134, 402, 200);
-			frame.getContentPane().add(table);
+			table.setModel(model);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
