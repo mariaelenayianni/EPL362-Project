@@ -16,6 +16,8 @@ public class legalStaffUI {
 
 	private JFrame frame;
 
+	private legalStaffClient ls;
+
 	/**
 	 * Launch the application.
 	 */
@@ -34,8 +36,11 @@ public class legalStaffUI {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @throws MalformedURLException
 	 */
-	public legalStaffUI() {
+	public legalStaffUI() throws MalformedURLException {
+		this.ls = new legalStaffClient();
 		initialize();
 	}
 
@@ -44,69 +49,47 @@ public class legalStaffUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(0,0,255,30));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 0, 0, 30));
-		panel.setBounds(296, 0, 138, 261);
-		frame.getContentPane().add(panel);
-		
-		
-		JLabel lblWarnings = new JLabel("Warnings:");
-		lblWarnings.setForeground(Color.RED);
-		lblWarnings.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
-		panel.add(lblWarnings);
-		
+
 		JLabel lblLegalStaff = new JLabel("Legal staff ");
 		lblLegalStaff.setForeground(Color.BLUE);
 		lblLegalStaff.setFont(new Font("Trebuchet MS", Font.BOLD | Font.ITALIC, 15));
 		lblLegalStaff.setBounds(153, 0, 93, 26);
 		frame.getContentPane().add(lblLegalStaff);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 128, 0, 30));
-		panel_1.setBounds(0, 25, 151, 236);
-		frame.getContentPane().add(panel_1);
 		frame.setVisible(true);
-		
+
+		JLabel lblWarnings = new JLabel("Warnings:");
+		lblWarnings.setBounds(333, 6, 63, 16);
+		frame.getContentPane().add(lblWarnings);
+		lblWarnings.setForeground(Color.RED);
+		lblWarnings.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+
+		JButton btnNewButton_2 = new JButton("Show Warnings");
+		btnNewButton_2.setBounds(306, 236, 118, 23);
+		frame.getContentPane().add(btnNewButton_2);
+		btnNewButton_2.setForeground(Color.RED);
+
 		JLabel lblOptions = new JLabel("Options:");
+		lblOptions.setBounds(10, 25, 52, 16);
+		frame.getContentPane().add(lblOptions);
 		lblOptions.setForeground(new Color(0, 128, 0));
 		lblOptions.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
-		panel_1.add(lblOptions);
-		
+
 		JButton btnNewButton = new JButton("Show Appoinments");
+		btnNewButton.setBounds(0, 52, 123, 23);
+		frame.getContentPane().add(btnNewButton);
 		btnNewButton.setForeground(new Color(0, 128, 0));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					new AppointmentWindow();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		panel_1.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Comment Request");
+		btnNewButton_1.setBounds(0, 86, 121, 23);
+		frame.getContentPane().add(btnNewButton_1);
 		btnNewButton_1.setForeground(new Color(0, 128, 0));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					new addCommentUI();
-				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		panel_1.add(btnNewButton_1);
-		
+
 		JButton btnShowEstimatedRisk = new JButton("Show Risk Indicator");
+		btnShowEstimatedRisk.setBounds(0, 120, 127, 23);
+		frame.getContentPane().add(btnShowEstimatedRisk);
 		btnShowEstimatedRisk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -118,9 +101,10 @@ public class legalStaffUI {
 			}
 		});
 		btnShowEstimatedRisk.setForeground(new Color(0, 128, 0));
-		panel_1.add(btnShowEstimatedRisk);
-		
+
 		JButton btnRequestForChange = new JButton("Request for change");
+		btnRequestForChange.setBounds(0, 164, 127, 23);
+		frame.getContentPane().add(btnRequestForChange);
 		btnRequestForChange.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -132,6 +116,68 @@ public class legalStaffUI {
 			}
 		});
 		btnRequestForChange.setForeground(new Color(0, 128, 0));
-		panel_1.add(btnRequestForChange);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new addCommentUI();
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					new AppointmentWindow();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		JLabel label = new JLabel("");
+		label.setForeground(Color.RED);
+		label.setBounds(306, 25, 118, 200);
+		label.setVisible(false);
+		frame.getContentPane().add(label);
+
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String contex="";
+				try {
+					contex=showWarnings();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				if(!contex.equals("")) {
+					label.setText(contex);
+					label.setVisible(true);
+				}
+
+			}
+		});
+
+	}
+
+	public String showWarnings() throws Exception {
+		ws.xml warnings = this.ls.showWarnings(globals.lawyerID);
+
+		String contex = null;
+		if (!warnings.t.isEmpty()) {
+			contex = "<html><ul>";
+			for (String[] row : warnings.t) {
+				contex += "<li>" + row[0] + " for client: " + row[1] + "</li>";
+			}
+			contex += "</ul></html>";
+
+		} else {
+			contex = "Nothing to show.";
+
+		}
+
+		return contex;
 	}
 }
